@@ -2,13 +2,15 @@ version: '3'
 services:
   frontend:
     build:
-      context: ./client
+      context: ./  # Deve apontar para o diretório raiz do projeto
+      dockerfile: ./client/Dockerfile  # Caminho para o Dockerfile do front-end
     ports:
       - "4200:4200"
 
   backend:
     build:
-      context: ./server
+      context: ./  # Deve apontar para o diretório raiz do projeto
+      dockerfile: ./server/Dockerfile  # Caminho para o Dockerfile do back-end
     ports:
       - "3000:3000"
     environment:
@@ -17,5 +19,3 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydatabase
-
-
