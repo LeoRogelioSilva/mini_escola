@@ -1,15 +1,22 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { AlunoEntity } from './aluno.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SaveAlunoDTO } from './dto/save-aluno.dto';
 import { UpdateAlunoDTO } from './dto/update-aluno.dto';
+import { MatriculaService } from '../matricula/matricula.service';
 
 @Injectable()
 export class AlunoService {
   constructor(
     @InjectRepository(AlunoEntity)
     private readonly alunoRepository: Repository<AlunoEntity>,
+    private readonly matriculaService: MatriculaService,
   ) {}
 
   async save(data: SaveAlunoDTO): Promise<AlunoEntity> {
@@ -43,7 +50,29 @@ export class AlunoService {
     return curso;
   }
 
+  async verificaMatriculas(codigoAluno: number) {
+    const matriculas =
+      await this.matriculaService.findByCodigoAluno(codigoAluno);
+
+    if (matriculas.length > 0) {
+      throw new HttpException(
+        {
+          message:
+            'Não é possível remover o aluno porque existem matrículas relacionadas a ele.',
+          statusCode: HttpStatus.UNPROCESSABLE_ENTITY, // Status 422
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+  }
+
   async remove(codigo: number) {
-    return this.alunoRepository.delete(codigo);
+    await this.verificaMatriculas(codigo);
+
+    try {
+      return this.alunoRepository.delete(codigo);
+    } catch (error) {
+      throw new Error('Erro ao remover o aluno.');
+    }
   }
 }

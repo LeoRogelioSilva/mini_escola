@@ -28,4 +28,20 @@ export class MatriculaService {
   remove(codigo: number) {
     return this.matriculaRepository.delete(codigo);
   }
+
+  async findByCodigoAluno(codigoAluno: number): Promise<MatriculaEntity[]> {
+    return this.matriculaRepository.find({
+      where: {
+        codigoAluno: codigoAluno,
+      },
+    });
+  }
+
+  async findByCodigoCurso(codigoCurso: number): Promise<MatriculaEntity[]> {
+    return this.matriculaRepository.find({
+      where: {
+        codigoCurso: codigoCurso,
+      },
+    });
+  }
 }

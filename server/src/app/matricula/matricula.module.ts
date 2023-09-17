@@ -8,5 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([MatriculaEntity])],
   controllers: [MatriculaController],
   providers: [MatriculaService],
+  exports: [MatriculaService],
 })
 export class MatriculaModule {}

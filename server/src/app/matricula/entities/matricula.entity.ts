@@ -8,10 +8,10 @@ export class MatriculaEntity {
   codigo: number;
 
   @OneToOne(() => CursoEntity)
-  @JoinColumn({ name: 'codigo_curso' }) // Nome do campo que representa o ID do curso
-  codigoCurso: number; // Alterado para número
+  @JoinColumn({ name: 'codigo_curso' })
+  codigoCurso: number;
 
   @OneToOne(() => AlunoEntity)
-  @JoinColumn({ name: 'codigo_aluno' }) // Nome do campo que representa o ID do aluno
-  codigoAluno: number; // Alterado para número
+  @JoinColumn({ name: 'codigo_aluno' })
+  codigoAluno: number;
 }
