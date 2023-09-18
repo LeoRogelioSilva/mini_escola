@@ -93,7 +93,9 @@ export class AddEditComponentMatricula implements OnInit {
 
   showErrorAlert() {
     this.errorAlert3.nativeElement.style.display = 'block';
-
+    setTimeout(() => {
+      this.errorAlert3.nativeElement.style.display = 'none';
+    }, 3000);
   }
 
   showSuccessAlert() {
