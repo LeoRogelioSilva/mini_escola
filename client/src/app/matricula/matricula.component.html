@@ -1,1 +1,44 @@
-<p>matricula works!</p>
+<div class="container">
+
+  <div class="align-center">
+    <h1>Matriculas</h1>
+  </div>
+  <div class="box-scroll align-center">
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th style="width: 30%">Código</th>
+          <th style="width: 30%">Nome</th>
+          <th style="width: 30%">Ementa</th>
+          <th style="width: 10%">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let matricula of matriculas">
+          <td>{{matricula.codigo}}</td>
+          <td>{{matricula.codigoAluno}}</td>
+          <td>{{matricula.codigoCurso}}</td>
+          <td style="white-space: nowrap">
+            <button (click)="deleteMatricula(matricula.codigo)" class="btn btn-sm btn-danger btn-delete-matricula">
+              <span>Delete</span>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="!matriculas">
+          <td colspan="4" class="text-center">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div #successAlert class="alert alert-success" style="display: none;">
+      Matricula deletado com sucesso!
+    </div>
+    <div #errorAlert class="alert alert-error" style="display: none;">
+      Não é possível deletar: Matricula está matriculado em um matricula!
+    </div>
+  </div>
+  <div class="align-center">
+    <a routerLink="add" class="btn btn-sm btn-success mb-2">Adicionar Matricula</a>
+  </div>
+</div>

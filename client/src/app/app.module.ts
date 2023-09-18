@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddEditComponent } from './aluno/add-edit.component';
 import { AddEditComponentCurso } from './curso/add-edit.component';
+import { AddEditComponentMatricula } from './matricula/add-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddEditComponentCurso } from './curso/add-edit.component';
     MatriculaComponent,
     HomeComponent,
     AddEditComponent,
-    AddEditComponentCurso
+    AddEditComponentCurso,
+    AddEditComponentMatricula
   ],
   imports: [
     BrowserModule,

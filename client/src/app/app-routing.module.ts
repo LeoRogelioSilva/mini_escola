@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { AlunoComponent } from './aluno/aluno.component';
 import { AddEditComponent } from './aluno/add-edit.component';
 import { AddEditComponentCurso } from './curso/add-edit.component';
+import { AddEditComponentMatricula } from './matricula/add-edit.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,16 @@ const routes: Routes = [
   },
   {
     path: 'matricula',
-    component: MatriculaComponent
+    children: [
+      {
+        path: '',
+        component: MatriculaComponent, // Seu componente principal de aluno
+      },
+      {
+        path: 'add',
+        component: AddEditComponentMatricula, // Seu componente para adicionar um aluno
+      },
+    ]
   }
 ];
 
