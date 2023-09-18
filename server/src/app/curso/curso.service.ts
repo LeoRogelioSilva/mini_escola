@@ -74,7 +74,7 @@ export class CursoService {
     try {
       return this.cursoRepository.delete(codigo);
     } catch (error) {
-      throw new Error('Erro ao remover o aluno.');
+      throw new Error('Erro ao remover o curso.');
     }
   }
 }

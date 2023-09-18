@@ -42,33 +42,26 @@ export class AlunoComponent {
       .subscribe(
         () => {
           this.alunos = this.alunos.filter((x) => x.codigo !== codigo);
-          // Exibir o alerta de sucesso
           this.showSuccessAlert();
         },
         (error) => {
-          // Lidar com o erro da requisição HTTP
           console.error('Erro na requisição:', error);
-          // Exibir um alerta de erro aqui, por exemplo:
           this.showErrorAlert();
         }
       );
   }
 
   showErrorAlert() {
-    // Exibir o alerta de sucesso
     this.errorAlert.nativeElement.style.display = 'block';
     setTimeout(() => {
-      // Ocultar o alerta após alguns segundos (por exemplo, 3 segundos)
       this.errorAlert.nativeElement.style.display = 'none';
-    }, 3000); // Tempo em milissegundos
+    }, 3000);
   }
 
   showSuccessAlert() {
-    // Exibir o alerta de sucesso
     this.successAlert.nativeElement.style.display = 'block';
     setTimeout(() => {
-      // Ocultar o alerta após alguns segundos (por exemplo, 3 segundos)
       this.successAlert.nativeElement.style.display = 'none';
-    }, 3000); // Tempo em milissegundos
+    }, 3000);
   }
 }

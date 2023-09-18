@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -12,6 +12,8 @@ export class AddEditComponent implements OnInit {
     isAddMode!: boolean;
     loading = false;
     submitted = false;
+    @ViewChild('successAlert') successAlert!: ElementRef;
+    @ViewChild('errorAlert') errorAlert!: ElementRef;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -58,9 +60,14 @@ export class AddEditComponent implements OnInit {
         this.alunoService.create(this.form.value)
             .pipe(first())
             .subscribe(() => {
-                alert('Sucesso!')
                 this.router.navigate(['/aluno']);
-            })
+                alert('Salvo com Sucesso!');
+              },
+              (error) => {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao Salvar');
+              }
+            )
             .add(() => this.loading = false);
     }
 
@@ -68,9 +75,14 @@ export class AddEditComponent implements OnInit {
         this.alunoService.update(this.codigo, this.form.value)
             .pipe(first())
             .subscribe(() => {
-                alert('Sucesso!')
                 this.router.navigate(['/aluno']);
-            })
+                alert('Salvo com Sucesso!');
+              },
+              (error) => {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao Salvar')
+              }
+            )
             .add(() => this.loading = false);
     }
 }

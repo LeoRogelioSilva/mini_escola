@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateMatriculaDto } from './dto/create-matricula.dto';
@@ -12,6 +12,21 @@ export class MatriculaService {
   ) {}
 
   async create(data: CreateMatriculaDto): Promise<MatriculaEntity> {
+    const matriculaExists = await this.findByCodigoAlunoAndCodigoCurso(
+      data.codigoAluno,
+      data.codigoCurso,
+    );
+
+    if (matriculaExists.length > 0) {
+      throw new HttpException(
+        {
+          message: 'Matrícula já existe.',
+          statusCode: HttpStatus.UNPROCESSABLE_ENTITY, // Status 422
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
     const matricula = this.matriculaRepository.create(data);
 
     return this.matriculaRepository.save(matricula);
@@ -33,6 +48,18 @@ export class MatriculaService {
     return this.matriculaRepository.find({
       where: {
         codigoAluno: codigoAluno,
+      },
+    });
+  }
+
+  async findByCodigoAlunoAndCodigoCurso(
+    codigoAluno: number,
+    codigoCurso: number,
+  ): Promise<MatriculaEntity[]> {
+    return this.matriculaRepository.find({
+      where: {
+        codigoAluno: codigoAluno,
+        codigoCurso: codigoCurso,
       },
     });
   }

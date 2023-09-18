@@ -29,6 +29,12 @@
         <a routerLink="/curso" class="btn btn-link">Cancel</a>
     </div>
 </form>
+<div #successAlert3 class="alert alert-success" style="display: none;">
+  Aluno deletado com sucesso!
+</div>
+<div #errorAlert3 class="alert alert-error" style="display: none;">
+  Não é possível deletar: Aluno está matriculado em um curso!
+</div>
 <style>
   /* Estilo para o título "Adicionar Aluno" ou "Editar Aluno" */
 h1 {
@@ -102,6 +108,41 @@ form {
   font-weight: bold;
   margin-left: 20px;
 }
+
+.alert-success {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #28a745; /* Cor de fundo verde */
+  color: #fff; /* Cor do texto branco */
+  padding: 20px;
+  border-radius: 10px; /* Bordas arredondadas */
+  z-index: 9999; /* Coloca o alerta acima de outros elementos */
+  display: none; /* Inicialmente oculto */
+}
+
+.alert-error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #dc3545; /* Cor de fundo verde */
+  color: #fff; /* Cor do texto branco */
+  padding: 20px;
+  border-radius: 10px; /* Bordas arredondadas */
+  z-index: 9999; /* Coloca o alerta acima de outros elementos */
+  display: none; /* Inicialmente oculto */
+}
+
+.alert-success.show {
+  display: block; /* Mostra o alerta quando a classe 'show' é adicionada */
+}
+
+.alert-error.show {
+  display: block; /* Mostra o alerta quando a classe 'show' é adicionada */
+}
+
 
 /* Animação do spinner de carregamento */
 @keyframes spinner-border {
