@@ -6,6 +6,7 @@ import { MatriculaComponent } from './matricula/matricula.component';
 import { HomeComponent } from './home/home.component';
 import { AlunoComponent } from './aluno/aluno.component';
 import { AddEditComponent } from './aluno/add-edit.component';
+import { AddEditComponentCurso } from './curso/add-edit.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,20 @@ const routes: Routes = [
   },
   {
     path: 'curso',
-    component: CursoComponent
+    children: [
+      {
+        path: '',
+        component: CursoComponent,
+      },
+      {
+        path: 'add',
+        component: AddEditComponentCurso,
+      },
+      {
+        path: 'edit/:id',
+        component: AddEditComponentCurso,
+      },
+    ]
   },
   {
     path: 'aluno',

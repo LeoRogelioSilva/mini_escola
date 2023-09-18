@@ -20,6 +20,7 @@ import { MatriculaComponent } from './matricula/matricula.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddEditComponent } from './aluno/add-edit.component';
+import { AddEditComponentCurso } from './curso/add-edit.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AddEditComponent } from './aluno/add-edit.component';
     FooterComponent,
     MatriculaComponent,
     HomeComponent,
-    AddEditComponent
+    AddEditComponent,
+    AddEditComponentCurso
   ],
   imports: [
     BrowserModule,

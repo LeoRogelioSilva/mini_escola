@@ -1,4 +1,34 @@
-/* Estilo para o título "Adicionar Aluno" ou "Editar Aluno" */
+<h1 *ngIf="isAddMode">Adicionar Curso</h1>
+<h1 *ngIf="!isAddMode">Editar Curso</h1>
+<form [formGroup]="form2" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col-5">
+            <label>Nome</label>
+            <input type="text" formControlName="nome" class="form-control"/>
+            <div *ngIf="submitted && f['nome'].errors" class="invalid-feedback">
+                <div *ngIf="f['nome'].errors['required']">Nome é obrigatório</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-5">
+          <label>Ementa</label>
+          <input type="textarea" formControlName="ementa" class="form-control"/>
+          <div *ngIf="submitted && f['ementa'].errors" class="invalid-feedback">
+              <div *ngIf="f['ementa'].errors['required']">Ementa é obrigatório</div>
+          </div>
+      </div>
+  </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/aluno" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+<style>
+  /* Estilo para o título "Adicionar Aluno" ou "Editar Aluno" */
 h1 {
   font-size: 24px;
   color: #333;
@@ -77,3 +107,5 @@ form {
     transform: rotate(360deg);
   }
 }
+
+</style>
