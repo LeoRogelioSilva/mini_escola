@@ -19,6 +19,20 @@
   color: #3f51b5; /* Texto branco ao passar o mouse */
 }
 
+.example-icon2 {
+  background-color: transparent; /* Fundo transparente */
+  color: #fff; /* Cor do texto */
+  padding: 5px 10px; /* Espaçamento interno */
+  align-items: center; /* Alinhar verticalmente ao centro */
+  justify-content: center; /* Alinhar horizontalmente ao centro */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: background-color 0.3s, color 0.3s; /* Efeito de transição suave */
+  margin-right: 20px;
+  border-radius: 0px;
+  border: none;
+  font-size:x-large;
+}
+
 /* Estilo para os ícones */
 mat-icon {
   font-size: 24px; /* Tamanho do ícone */

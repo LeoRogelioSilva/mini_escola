@@ -17,4 +17,7 @@ export class HeaderComponent {
   navigateToMatricula() {
     this.router.navigate(['/matricula']); // Navega para a rota 'aluno'
   }
+  navigateToHome() {
+    this.router.navigate(['/']); // Navega para a rota 'aluno'
+  }
 }

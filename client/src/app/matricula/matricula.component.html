@@ -1,23 +1,23 @@
 <div class="container">
 
   <div class="align-center">
-    <h1>Matriculas</h1>
+    <h1>Matrículas</h1>
   </div>
   <div class="box-scroll align-center">
     <table class="tabela">
       <thead>
         <tr>
           <th style="width: 30%">Código</th>
-          <th style="width: 30%">Nome</th>
-          <th style="width: 30%">Ementa</th>
+          <th style="width: 30%">Aluno</th>
+          <th style="width: 30%">Curso</th>
           <th style="width: 10%">Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let matricula of matriculas">
           <td>{{matricula.codigo}}</td>
-          <td>{{matricula.codigoAluno}}</td>
-          <td>{{matricula.codigoCurso}}</td>
+          <td>{{getNomeAluno(matricula.codigoAluno)}}</td>
+          <td>{{getNomeCurso(matricula.codigoCurso)}}</td>
           <td style="white-space: nowrap">
             <button (click)="deleteMatricula(matricula.codigo)" class="btn btn-sm btn-danger btn-delete-matricula">
               <span>Delete</span>

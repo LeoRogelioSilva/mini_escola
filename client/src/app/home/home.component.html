@@ -1,4 +1,22 @@
-<div>
-  <h1>Página Inicial</h1>
-  <button (click)="navigateToAluno()">Ir para a página de Alunos</button>
+<div class="container">
+  <div class="card-container">
+    <a routerLink="/alunos" class="card">
+      <div class="card-content">
+        <h1 class="card-title">Alunos</h1>
+        <p class="card-description">Clique para acessar a seção de Alunos</p>
+      </div>
+    </a>
+    <a routerLink="/cursos" class="card">
+      <div class="card-content">
+        <h1 class="card-title">Cursos</h1>
+        <p class="card-description">Clique para acessar a seção de Cursos</p>
+      </div>
+    </a>
+    <a routerLink="/matriculas" class="card">
+      <div class="card-content">
+        <h1 class="card-title">Matrículas</h1>
+        <p class="card-description">Clique para acessar a seção de Matrículas</p>
+      </div>
+    </a>
+  </div>
 </div>

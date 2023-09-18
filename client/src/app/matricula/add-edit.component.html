@@ -1,20 +1,26 @@
-<h1 *ngIf="isAddMode">Adicionar Matrícula</h1>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+  <h1 *ngIf="isAddMode">Adicionar Matrícula</h1>
+</div>
 <form [formGroup]="form3" (ngSubmit)="onSubmit()">
     <div class="form-row">
         <div class="form-group col-5">
-            <label>Nome</label>
-            <input type="text" formControlName="nome" class="form-control"/>
-            <div *ngIf="submitted && f['nome'].errors" class="invalid-feedback">
-                <div *ngIf="f['nome'].errors['required']">Nome é obrigatório</div>
+            <label>Aluno</label>
+            <select formControlName="codigoAluno" class="select">
+              <option *ngFor="let aluno of alunoList" [value]="aluno.codigo">{{ aluno.nome }}</option>
+            </select>
+            <div *ngIf="submitted && f['codigoAluno'].errors" class="invalid-feedback">
+                <div *ngIf="f['codigoAluno'].errors['required']">Aluno é obrigatório</div>
             </div>
         </div>
     </div>
     <div class="form-row">
       <div class="form-group col-5">
-          <label>Ementa</label>
-          <input type="textarea" formControlName="ementa" class="form-control"/>
-          <div *ngIf="submitted && f['ementa'].errors" class="invalid-feedback">
-              <div *ngIf="f['ementa'].errors['required']">Ementa é obrigatório</div>
+          <label>Código Curso</label>
+          <select formControlName="codigoCurso" class="select">
+            <option *ngFor="let curso of cursoList" [value]="curso.codigo">{{ curso.nome }}</option>
+          </select>
+          <div *ngIf="submitted && f['codigoCurso'].errors" class="invalid-feedback">
+              <div *ngIf="f['codigoCurso'].errors['required']">Curso é obrigatório</div>
           </div>
       </div>
   </div>
@@ -23,7 +29,7 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Save
         </button>
-        <a routerLink="/aluno" class="btn btn-link">Cancel</a>
+        <a routerLink="/matricula" class="btn btn-link">Cancel</a>
     </div>
 </form>
 <style>
@@ -66,7 +72,7 @@ form {
 
 /* Estilo para o botão "Salvar" */
 .btn-primary {
-  background-color: #007bff;
+  background-color: #3f51b5;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -94,10 +100,40 @@ form {
 
 /* Estilo para o botão "Cancelar" */
 .btn-link {
-  color: #007bff;
+  color: #3f51b5;
   text-decoration: none;
   font-weight: bold;
   margin-left: 20px;
+}
+
+/* Estilo para o <select> */
+  select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Estilo para a seta do <select> */
+select::after {
+  content: '\25BC'; /* Setinha para baixo ▼ */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* Estilo para o <select> quando em foco */
+select:focus {
+  outline: none;
+  border-color: #3f51b5; /* Cor de foco */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra de foco */
 }
 
 /* Animação do spinner de carregamento */

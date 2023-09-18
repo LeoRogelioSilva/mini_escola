@@ -6,6 +6,11 @@ import { first } from 'rxjs/operators';
 
 import { MatriculaService } from './matricula.service';
 import { Matricula } from './matricula';
+import { AlunoService } from '../aluno/aluno.service';
+import { CursoService } from '../curso/curso.service';
+import { Aluno } from '../aluno/aluno';
+import { Curso } from '../curso/curso';
+
 
 @Component({
   selector: 'app-matricula',
@@ -13,8 +18,14 @@ import { Matricula } from './matricula';
   styleUrls: ['./matricula.component.css']
 })
 export class MatriculaComponent {
-  constructor(private matriculaService: MatriculaService) { }
+  constructor(
+    private matriculaService: MatriculaService,
+    private alunoService: AlunoService,
+    private cursoService: CursoService,
+  ) { }
 
+  alunos: Aluno[] = []
+  cursos: Curso[] = []
   matriculas: Matricula[] = [];
   displayedColumns: string[] = ['codigo', 'nome', 'ementa', 'action'];
   dataSource = new MatTableDataSource<Matricula>(this.matriculas);
@@ -24,6 +35,20 @@ export class MatriculaComponent {
 
   ngOnInit() {
     this.loadMatriculas();
+    this.loadAlunos();
+    this.loadCursos();
+  }
+
+  loadAlunos() {
+    this.alunoService.getAll().subscribe((data) => {
+      this.alunos = data;
+    });
+  }
+
+  loadCursos() {
+    this.cursoService.getAll().subscribe((data) => {
+      this.cursos = data;
+    });
   }
 
   loadMatriculas() {
@@ -32,6 +57,21 @@ export class MatriculaComponent {
     });
   }
 
+  getNomeAluno(codigo: number){
+    const aluno = this.alunos.find(x => x.codigo === codigo)
+    if(aluno){
+      return(aluno.nome)
+    }
+    return "";
+  }
+
+  getNomeCurso(codigo: number){
+    const curso = this.cursos.find(x => x.codigo === codigo)
+    if(curso){
+      return(curso.nome)
+    }
+    return "";
+  }
 
   deleteMatricula(codigo: number) {
     const matricula = this.matriculas.find(x => x.codigo === codigo);
