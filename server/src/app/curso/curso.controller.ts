@@ -3,9 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put
 } from '@nestjs/common';
 import { CursoService } from './curso.service';
 import { CreateCursoDto } from './dto/create-curso.dto';
@@ -30,7 +30,7 @@ export class CursoController {
     return this.cursoService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateCursoDto: UpdateCursoDto) {
     return this.cursoService.update(+id, updateCursoDto);
   }

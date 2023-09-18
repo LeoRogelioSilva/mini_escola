@@ -5,6 +5,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatriculaComponent } from './matricula/matricula.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddEditComponent } from './aluno/add-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     MatriculaComponent,
-    HomeComponent
+    HomeComponent,
+    AddEditComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatMenuModule,
     MatTableModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

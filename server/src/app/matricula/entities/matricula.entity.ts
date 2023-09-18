@@ -1,17 +1,13 @@
-import { AlunoEntity } from 'src/app/aluno/aluno.entity';
-import { CursoEntity } from 'src/app/curso/entities/curso.entity';
-import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity({ name: 'matricula' })
 export class MatriculaEntity {
   @PrimaryGeneratedColumn()
   codigo: number;
 
-  @OneToOne(() => CursoEntity)
-  @JoinColumn({ name: 'codigo_curso' })
+  @Column({ nullable: true })
   codigoCurso: number;
 
-  @OneToOne(() => AlunoEntity)
-  @JoinColumn({ name: 'codigo_aluno' })
+  @Column({ nullable: true })
   codigoAluno: number;
 }

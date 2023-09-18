@@ -10,6 +10,7 @@ import { Repository } from 'typeorm';
 import { SaveAlunoDTO } from './dto/save-aluno.dto';
 import { UpdateAlunoDTO } from './dto/update-aluno.dto';
 import { MatriculaService } from '../matricula/matricula.service';
+import { MatriculaEntity } from '../matricula/entities/matricula.entity';
 
 @Injectable()
 export class AlunoService {
@@ -24,7 +25,11 @@ export class AlunoService {
   }
 
   async findAll(): Promise<AlunoEntity[]> {
-    return this.alunoRepository.find();
+    return this.alunoRepository.find({
+      order: {
+        codigo: 'ASC', // 'ASC' para ordem ascendente, 'DESC' para ordem descendente
+      },
+    });
   }
 
   async findOne(codigo: number): Promise<AlunoEntity | null> {
@@ -64,6 +69,10 @@ export class AlunoService {
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
+  }
+
+  async findMatricula(codigoAluno: number): Promise<MatriculaEntity[]> {
+    return this.matriculaService.findByCodigoAluno(codigoAluno);
   }
 
   async remove(codigo: number) {

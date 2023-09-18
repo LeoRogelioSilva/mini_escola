@@ -1,30 +1,11 @@
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {SelectionModel} from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { AlunoService } from './aluno.service';
-
-export interface Aluno {
-  codigo: number;
-  nome: string;
-  isDeleting: boolean;
-}
-
-const tableData: Aluno[] = [
-  {
-    codigo: 1,
-    nome: "Teste",
-    isDeleting: false
-  },
-  {
-    codigo: 1,
-    nome: "Teste",
-    isDeleting: false
-  }
-]
-
+import { Aluno } from './aluno';
 
 @Component({
   selector: 'app-aluno',
@@ -32,45 +13,62 @@ const tableData: Aluno[] = [
   styleUrls: ['./aluno.component.css'],
 })
 export class AlunoComponent {
-  constructor(private alunoService: AlunoService){}
+  constructor(private alunoService: AlunoService) { }
 
-  alunos: Aluno[] = tableData
+  alunos: Aluno[] = [];
   displayedColumns: string[] = ['codigo', 'nome', 'action'];
-  dataSource = new MatTableDataSource<Aluno>(tableData);
+  dataSource = new MatTableDataSource<Aluno>(this.alunos);
   selection = new SelectionModel<Aluno>(true, []);
+  @ViewChild('successAlert') successAlert!: ElementRef;
+  @ViewChild('errorAlert') errorAlert!: ElementRef;
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+  ngOnInit() {
+    this.loadAlunos();
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  toggleAllRows() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
-
-    this.selection.select(...this.dataSource.data);
+  loadAlunos() {
+    this.alunoService.getAll().subscribe((data) => {
+      this.alunos = data;
+    });
   }
 
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Aluno): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.codigo + 1}`;
-  }
 
-  deleteAluno(codigo: number){
+  deleteAluno(codigo: number) {
     const aluno = this.alunos.find(x => x.codigo === codigo);
-        if (!aluno) return;
-        aluno.isDeleting = true;
-        this.alunoService.delete(codigo)
-            .pipe(first())
-            .subscribe(() => this.alunos = this.alunos.filter(x => x.codigo !== codigo));
+    if (!aluno) return;
+    aluno.isDeleting = true;
+    this.alunoService.delete(codigo)
+      .pipe(first())
+      .subscribe(
+        () => {
+          this.alunos = this.alunos.filter((x) => x.codigo !== codigo);
+          // Exibir o alerta de sucesso
+          this.showSuccessAlert();
+        },
+        (error) => {
+          // Lidar com o erro da requisição HTTP
+          console.error('Erro na requisição:', error);
+          // Exibir um alerta de erro aqui, por exemplo:
+          this.showErrorAlert();
+        }
+      );
+  }
 
+  showErrorAlert() {
+    // Exibir o alerta de sucesso
+    this.errorAlert.nativeElement.style.display = 'block';
+    setTimeout(() => {
+      // Ocultar o alerta após alguns segundos (por exemplo, 3 segundos)
+      this.errorAlert.nativeElement.style.display = 'none';
+    }, 3000); // Tempo em milissegundos
+  }
+
+  showSuccessAlert() {
+    // Exibir o alerta de sucesso
+    this.successAlert.nativeElement.style.display = 'block';
+    setTimeout(() => {
+      // Ocultar o alerta após alguns segundos (por exemplo, 3 segundos)
+      this.successAlert.nativeElement.style.display = 'none';
+    }, 3000); // Tempo em milissegundos
   }
 }

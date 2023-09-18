@@ -1,5 +1,5 @@
 export class Aluno {
-    codigo!: string;
+    codigo!: number;
     nome!: string;
     isDeleting: boolean = false;
 }

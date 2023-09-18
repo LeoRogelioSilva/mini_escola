@@ -3,9 +3,9 @@ import {
   Body,
   Post,
   Get,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { AlunoService } from './aluno.service';
 import { SaveAlunoDTO } from './dto/save-aluno.dto';
@@ -25,17 +25,22 @@ export class AlunoController {
     return this.alunoService.findAll();
   }
 
+  @Get('/teste/:codigo')
+  async findMatricula(@Param('codigo') codigo: string) {
+    return this.alunoService.findMatricula(Number(codigo));
+  }
+
   @Get(':codigo')
   findOne(@Param('codigo') codigo: number) {
     return this.alunoService.findOne(+codigo);
   }
 
-  @Patch(':codigo')
+  @Put(':codigo')
   update(
-    @Param('codigo') codigo: string,
-    @Body() updateMatriculaDto: UpdateAlunoDTO,
+    @Param('codigo') codigo: number,
+    @Body() updateAlunoDto: UpdateAlunoDTO,
   ) {
-    return this.alunoService.update(+codigo, updateMatriculaDto);
+    return this.alunoService.update(+codigo, updateAlunoDto);
   }
 
   @Delete(':codigo')

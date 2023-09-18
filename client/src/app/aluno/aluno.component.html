@@ -1,29 +1,44 @@
-<h1>Users</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width: 30%">Código</th>
-            <th style="width: 30%">Nome</th>
-            <th style="width: 10%"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let aluno of alunos">
-            <td>{{aluno.codigo}}</td>
-            <td>{{aluno.nome}}</td>
-            <td style="white-space: nowrap">
-                <a routerLink="edit/{{aluno.codigo}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteAluno(aluno.codigo)" class="btn btn-sm btn-danger btn-delete-aluno">
+<div class="container">
 
-                    <span>Delete</span>
-                </button>
-            </td>
+  <div class="align-center">
+    <h1>Alunos</h1>
+  </div>
+  <div class="box-scroll align-center">
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th style="width: 30%">Código</th>
+          <th style="width: 30%">Nome</th>
+          <th style="width: 10%">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunos">
+          <td>{{aluno.codigo}}</td>
+          <td>{{aluno.nome}}</td>
+          <td style="white-space: nowrap">
+            <a routerLink="edit/{{aluno.codigo}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+            <button (click)="deleteAluno(aluno.codigo)" class="btn btn-sm btn-danger btn-delete-aluno">
+
+              <span>Delete</span>
+            </button>
+          </td>
         </tr>
         <tr *ngIf="!alunos">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
+          <td colspan="4" class="text-center">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+          </td>
         </tr>
-    </tbody>
-</table>
+      </tbody>
+    </table>
+    <div #successAlert class="alert alert-success" style="display: none;">
+      Aluno deletado com sucesso!
+    </div>
+    <div #errorAlert class="alert alert-error" style="display: none;">
+      Não é possível deletar: Aluno está matriculado em um curso!
+    </div>
+  </div>
+  <div class="align-center">
+    <a routerLink="add" class="btn btn-sm btn-success mb-2">Adicionar Aluno</a>
+  </div>
+</div>
