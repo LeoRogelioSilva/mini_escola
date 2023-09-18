@@ -1,0 +1,39 @@
+/* Estilo base para os botões */
+.example-icon {
+  background-color: transparent; /* Fundo transparente */
+  border: 2px solid #fff; /* Borda com cor azul */
+  border-radius: 5px; /* Borda arredondada */
+  color: #fff; /* Cor do texto */
+  padding: 5px 10px; /* Espaçamento interno */
+  /* Exibir como flexbox para alinhar ícone e texto */
+  align-items: center; /* Alinhar verticalmente ao centro */
+  justify-content: center; /* Alinhar horizontalmente ao centro */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: background-color 0.3s, color 0.3s; /* Efeito de transição suave */
+  margin-right: 20px;
+}
+
+/* Estilo ao passar o mouse */
+.example-icon:hover {
+  background-color: #fff; /* Fundo azul ao passar o mouse */
+  color: #3f51b5; /* Texto branco ao passar o mouse */
+}
+
+/* Estilo para os ícones */
+mat-icon {
+  font-size: 24px; /* Tamanho do ícone */
+  margin-right: 8px; /* Espaço à direita do ícone */
+}
+
+/* Estilo para o texto */
+.nav-span {
+  font-size: 16px;
+}
+
+.nav-items { /* Exibir como flexbox para alinhar horizontalmente */
+  justify-content: end; /* Alinhar à direita */
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

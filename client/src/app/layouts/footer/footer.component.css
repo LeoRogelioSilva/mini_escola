@@ -1,0 +1,13 @@
+.container {
+  background-color: #ccc;
+  padding: 20px 0; /* Ajuste o padding conforme necessário */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+
+.copyright {
+  color: #02f;
+}
