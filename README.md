@@ -52,3 +52,20 @@ npm run start
 
 ## Pronto! Todo o projeto está instalado e configurado!
 ## Acesse <a href="http://127.0.0.1:4200/"> Aqui </a> para ver o projeto instalado rodando
+
+# Testes
+## Testes e2e no client
+### Depois de executar o projeto, abra um terminal na pasta client e dê o comando:
+``` bash
+npx cypress open
+```
+#### Selecione a opção E2E e o seu navegador de preferência
+#### Selecione o arquivo testeE2E.cy.ts para visualizar o teste e2e dos componentes do sistema.
+
+## Testes unitários no server
+#### Com o server executando, abra um terminal na pasta /server e dê o comando:
+```bash
+npm test
+```
+#### Com isso, os testes unitários de aluns componentes do sistema serão executados.
+
