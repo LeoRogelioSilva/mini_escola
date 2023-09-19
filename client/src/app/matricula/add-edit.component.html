@@ -5,7 +5,7 @@
     <div class="form-row">
         <div class="form-group col-5">
             <label>Aluno</label>
-            <select formControlName="codigoAluno" class="select">
+            <select formControlName="codigoAluno" id="codigoAluno" class="select">
               <option *ngFor="let aluno of alunoList" [value]="aluno.codigo">{{ aluno.nome }}</option>
             </select>
             <div *ngIf="submitted && f['codigoAluno'].errors" class="invalid-feedback">
@@ -16,7 +16,7 @@
     <div class="form-row">
       <div class="form-group col-5">
           <label>Código Curso</label>
-          <select formControlName="codigoCurso" class="select">
+          <select formControlName="codigoCurso" id="codigoCurso" class="select">
             <option *ngFor="let curso of cursoList" [value]="curso.codigo">{{ curso.nome }}</option>
           </select>
           <div *ngIf="submitted && f['codigoCurso'].errors" class="invalid-feedback">

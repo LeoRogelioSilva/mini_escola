@@ -1,9 +1,9 @@
 
 .container {
   display: flex;
-  margin-top: 20%;
-  margin-left: 40px;
-  margin-right: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
 }
 
 .card-container {

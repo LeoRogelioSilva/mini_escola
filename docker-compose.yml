@@ -1,20 +1,24 @@
 version: '3'
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_DB: matricula
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: 123456789
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
     ports:
-      - "5432:5432"
-    volumes:
-      - ./data:/var/lib/postgresql/data
-      - ./scripts:/docker-entrypoint-initdb.d
-    networks:
-      - networkEscola
-networks:
-  networkEscola:
-    driver: bridge
+      - "4200:4200"
+  backend:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: leoo1202
+      POSTGRES_DB: matricula
+
+
+
 
