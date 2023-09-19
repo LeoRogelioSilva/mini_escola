@@ -1,4 +1,4 @@
-# teste_vr_software
+# Mini Escola
 
 ## Instalação
 
